@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="controller.js"></script> 
+   
+</head>
+
+
+<style>
+
+    @font-face {
+  font-family: 'Righteous';
+  font-style: normal;
+  font-weight: 400;
+  src: local('assets/Righteous.ttf'), local('assets/Righteous-Regular.ttf'), url(http://themes.googleusercontent.com/static/fonts/righteous/v2/w5P-SI7QJQSDqB3GziL8XaCWcynf_cDxXwCLxiixG1c.ttf) format('truetype');
+}
+
+  html,
+  body {
+    
+    font-family: 'Righteous' !important;
+
+  }
+
+button:hover{
+      cursor: pointer;
+}
+
+img:hover {
+    cursor: pointer;
+}
+
+body{
+    background: url("assets/img/bck.png") no-repeat center center, #ececec;
+    background-size: 150%;
+    background-position:70% 0%;
+    
+}
+
+.button{
+    color:white;
+    font-size:22px;
+    border:none;
+    text-shadow:1px 1px rgba(0,0,0,.5);
+    box-shadow:-1px 2px rgba(0,0,0,.5);
+}
+
+.red{background-color: #dc5a63;}
+.orange{background-color: #f5b95b;}
+.blue{background-color: #77b9bf;}
+.green{background-color: #b5daa2;}
+.purple{background-color: #817ba8;}
+.yellow{background-color: #f5f180;}
+
+</style>
+<body>
+    <div class="container" style="color:black;font-size:20px;text-align:center">
+<span style="font-size:35px">
+        Welcome to <b>Chameleon Player</b>
+</span><br>
+developed by <b>Cinq-Mars Media</b>
+    <br>
+<hr>
+<div id="steamFrame" style="display:none;text-align:center;padding-left:10px">
+  <!--
+<iframe style="z-index:99;position:relative;padding-left:5px" src="https://store.steampowered.com/widget/834170/" frameborder="0" width="98%" height="188px" async></iframe>-->
+
+<img onclick="controller('steamexternal')" width="98%" height="188px" src="assets/steam.png">
+
+</div>
+<div id="snInput"><br>
+    <input id="email" style="width:70%;font-size:22px" placeholder=" email address"><br><br>
+    <input id="sn1" maxlength="4" style="width:21%;font-size:22px" placeholder=" XXXX"> - <input id="sn2" maxlength="4" style="width:21%;font-size:22px" placeholder=" XXXX"> - <input id="sn3" maxlength="4" style="width:21%;font-size:22px" placeholder=" XXXX"><br>
+<br>
+    <button class="button green" onclick="enterLicense()"><b>Enter License</b></button>
+    <br></div><hr>
+    <button id="purch" class="button blue" onclick="controller('purchaselicense')"><b>Purchase License</b></button>
+    <button class="button purple" onclick="controller('demo')"><b>Try Free <i  style="font-size:18px">(<span id="numTrials"></span> run<span id="ess"></span> left)</i><b></button>
+
+      <div id="break"><br></div>
+
+    <button class="button red" onclick="controller('quitprompt')"><b>Quit Program</b></button>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="controller.js"></script>   
+</head>
+<style>
+body{
+    background: url("assets/img/bck.png") no-repeat center center, #ececec;
+    background-size: 150%;
+    background-position:70% 0%;
+}
+
+.button{
+    color:white;
+    font-size:15px;
+    border:none;
+    text-shadow:1px 1px rgba(0,0,0,.5);
+    box-shadow:-1px 2px rgba(0,0,0,.5);
+}
+
+.red{background-color: #dc5a63;}
+.orange{background-color: #f5b95b;}
+.blue{background-color: #77b9bf;}
+.green{background-color: #b5daa2;}
+.purple{background-color: #817ba8;}
+.yellow{background-color: #f5f180;}
+
+#slidecontainer {
+    width: 100%;
+}
+
+.slider:hover {
+    opacity: 1;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 10px;
+    border-radius: 5px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 23px;
+    height: 24px;
+    border: 0;
+    background: url('assets/icons/contrast.svg');
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 23px;
+    height: 24px;
+    border: 0;
+    background: url('assets/icons/contrast.svg');
+    cursor: pointer;
+}
+
+img {
+-webkit-user-select: none;
+-khtml-user-select: none;
+-moz-user-select: none;
+-o-user-select: none;
+user-select: none;
+}
+
+button:hover{
+      cursor: pointer;
+}
+
+img:hover {
+    cursor: pointer;
+}
+
+
+</style>
+<body>
+    <div class="container" style="color:black;font-size:13px;text-align:center">
+        <br> <br>
+      <div id="slidecontainer">
+  <input type="range" min="0" max="100" value="30" class="slider" id="myRange">
+</div><br>
+<!--
+       <br>
+        <button class="button red" onclick="controller('opacityplus',null)">Opacity <b>+</b></button><b> ⇧⌘=</b>
+
+        <button class="button red" onclick="controller('opacityminus',null)">Opacity <b>-</b></button><b> ⇧⌘-</b>
+        <br>
+
+        <hr style="border-color:black !important">
+          -->
+<button onclick="hide()" class="button red" id="hide">Toggle Background / Foreground Content</button>
+          
+<div id="scrubbing">
+<img onclick="controller('timefastback',null)" src="assets/icons/ic_fast_rewind_black_24px.svg" draggable="false" style="width:40px">
+<img  onclick="controller('timeminus',null)" src="assets/icons/ic_replay_10_black_24px.svg" draggable="false" style="width:40px">
+<img id="playpauser" onclick="controller('playpause',null)" src="assets/icons/ic_pause_black_24px.svg" draggable="false" style="width:40px">
+<img onclick="controller('timeplus',null)" src="assets/icons/ic_forward_10_black_24px.svg" draggable="false" style="width:40px">
+<img onclick="controller('timefastforward',null)" src="assets/icons/ic_fast_forward_black_24px.svg" draggable="false" style="width:40px">
+</div>
+
+<hr style="border-color:black !important">
+<b>Keyboard Shortcuts<br>
+<br>
+<!-- MAC-->
+
+<span id="ctrls">
+Play/Pause: ⇧<span id="plat1"></span>P&nbsp;&nbsp;&nbsp;&nbsp;
+Mute: ⇧<span id="plat2"></span>M<br>
+Back10: ⇧<span id="plat3"></span>[&nbsp;&nbsp;&nbsp;&nbsp;
+Forward10: ⇧<span id="plat4"></span>] 
+</span>
+<br>
+
+<span id='togshort' style="display:none">&nbsp;&nbsp;Toggle: ⇧<span id="plat7"></span>T&nbsp;&nbsp;</span>
+
+Opacity+: ⇧<span id="plat5"></span>=&nbsp;&nbsp;&nbsp;&nbsp;  
+Opacity-: ⇧<span id="plat6"></span>-
+
+
+
+
+
+
+
+
+<br><br>
+</b>
+<button class="button blue" onclick="bakc()"> Back to Main </button>
+        <button class="button orange" onclick="controller('quit',null)"> Quit Chameleon</button>
+        <br><br>
+Version <b>2.0.1</b> Cinq-Mars Media © 2018
+    </div>
+
+<script>
+
+
+    var slider = document.getElementById("myRange");
+
+slider.oninput = function() {
+  controller('opac',this.value/100);
+
+}
+
+//document.getElementById("plat").innerHTML="⊞"; //⌘
+
+  </script>  
+</body>
+</html>

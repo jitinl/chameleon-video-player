@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="controller.js"></script> 
+
+</head>
+
+
+<style>
+
+    @font-face {
+  font-family: 'Righteous';
+  font-style: normal;
+  font-weight: 400;
+  src: local('assets/Righteous.ttf'), local('assets/Righteous-Regular.ttf'), url(http://themes.googleusercontent.com/static/fonts/righteous/v2/w5P-SI7QJQSDqB3GziL8XaCWcynf_cDxXwCLxiixG1c.ttf) format('truetype');
+}
+
+  html,
+  body {
+    
+    font-family: 'Righteous' !important;
+
+  }
+
+body{
+    background: url("assets/img/bck.png") no-repeat center center, #ececec;
+    background-size: 150%;
+    background-position:70% 0%;
+    
+}
+
+.button{
+    color:white;
+    font-size:22px;
+    border:none;
+    text-shadow:1px 1px rgba(0,0,0,.5);
+    box-shadow:-1px 2px rgba(0,0,0,.5);
+}
+
+.red{background-color: #dc5a63;}
+.orange{background-color: #f5b95b;}
+.blue{background-color: #77b9bf;}
+.green{background-color: #b5daa2;}
+.purple{background-color: #817ba8;}
+.yellow{background-color: #f5f180;}
+
+.grid{
+	width:150px;float:left;text-align:center;padding-bottom:20px;padding:10px;
+
+}
+
+img {
+-webkit-user-select: none;
+-khtml-user-select: none;
+-moz-user-select: none;
+-o-user-select: none;
+user-select: none;
+/*box-shadow: 2px 2px #888888;*/
+}
+
+button:hover{
+      cursor: pointer;
+}
+
+img:hover {
+    cursor: pointer;
+}
+
+.ovv:hover{cursor:none !important}
+
+</style>
+<body style="overflow:hidden">
+    <div class="container" style="color:black;font-size:20px;text-align:center;padding-top:10px">
+      <!--
+ <div style="width:250px;float:left;padding-top:15px;line-height:12px">
+  <div onclick="controller('startwfile')">
+      <img src="assets/img/file.png" draggable="false" style="width:180px;height:180px"><br>
+      Choose Local File(s)<br>
+      <span style="font-size:12px">Select local video files to play</span>
+  </div><br><hr><br>
+  <img id="imag" class="ovv" src="assets/img/mac.jpg" draggable="false" style="width:200px;opacity:.8">
+  <br>
+  <span style="font-size:13px;line-height:8px">
+Chameleon is a tray application, control by clicking on the icon in the menubar or using keyboard shorcuts.
+</span>
+  
+    </div>
+  -->
+<div style="text-align:center">
+    
+  <div onclick="controller('startwfile')" class="grid">
+      <img src="assets/img/file8.png" draggable="false" style="width:100px;height:100px"><br>
+      Local File(s)
+      <!--<br>
+      <span style="font-size:12px">Select local video files to play</span>
+    -->
+  </div>
+
+<!-- 
+    <div onclick="controller('openStreamBrowser','http://www.netflix.com')" class="grid">
+    	<img src="assets/img/netflix.png" draggable="false" style="width:100px;height:100px"><br>
+    	Netflix
+    </div>
+
+     <div onclick="controller('openStreamBrowser','http://www.hulu.com')" class="grid">
+    	<img src="assets/img/hulu.jpg" draggable="false" style="width:100px;height:100px"><br>
+    	Hulu
+    </div>
+     <div onclick="controller('openStreamBrowser','https://www.amazon.com/Amazon-Video/b/?&node=2858778011')" class="grid">
+    	<img src="assets/img/amazon.png" draggable="false" style="width:100px;height:100px"><br>
+    	Amazon
+    </div>
+-->
+
+ <div onclick="controller('openStreamBrowser','http://abc.go.com/watch-live')" class="grid">
+      <img src="assets/img/abc.png" draggable="false" style="width:100px;height:100px"><br>
+     ABC Go
+    </div>
+
+<div onclick="controller('openStreamBrowser','https://www.nbc.com/live')" class="grid">
+      <img src="assets/img/nbc9.png" draggable="false" style="width:100px;height:100px"><br>
+     NBC
+    </div>
+  <div onclick="controller('openStreamBrowser','https://www.tntdrama.com/watchtnt')" class="grid">
+      <img src="assets/img/tnt.png" draggable="false" style="width:100px;height:100px"><br>
+     TNT
+    </div>
+     <div onclick="controller('openStreamBrowser','https://www.tbs.com')" class="grid">
+      <img src="assets/img/tbs.png" draggable="false" style="width:100px;height:100px"><br>
+     TBS
+    </div>
+
+<div onclick="controller('openStreamBrowser','https://play.hbonow.com')" class="grid">
+      <img src="assets/img/hbo.png" draggable="false" style="width:100px;height:100px"><br>
+     HBO Now
+    </div>
+ 
+     <div onclick="controller('openStreamBrowser','https://www.twitch.tv')" class="grid">
+      <img src="assets/img/twitch8.png" draggable="false" style="width:100px;height:100px"><br>
+      Twitch TV
+    </div>
+    <div onclick="controller('openStreamBrowser','https://www.youtube.com')" class="grid">
+      <img src="assets/img/youtube2.png" draggable="false" style="width:100px;height:100px"><br>
+      YouTube
+    </div>
+
+  
+   <div onclick="controller('openStreamBrowser','https://www.pbs.org/shows/')" class="grid">
+      <img src="assets/img/pbs.png" draggable="false" style="width:100px;height:100px"><br>
+     PBS
+    </div>
+    <div onclick="controller('openStreamBrowser','http://www.espn.com/watch/')" class="grid">
+      <img src="assets/img/espn.png" draggable="false" style="width:100px;height:100px"><br>
+     Watch ESPN
+    </div>
+     <div onclick="controller('openStreamBrowser','http://www.usanetwork.com/videos/live')" class="grid">
+      <img src="assets/img/usa9.png" draggable="false" style="width:100px;height:100px"><br>
+     USA
+    </div>
+   
+    <!--
+    <div onclick="controller('openStreamBrowser','https://www.sonycrackle.com')" class="grid">
+      <img src="assets/img/crackle.jpg" draggable="false" style="width:100px;height:100px"><br>
+     Crackle
+    </div>
+  -->
+    <div onclick="controller('openStreamBrowser','http://go.cnn.com/')" class="grid">
+      <img src="assets/img/cnn9.png" draggable="false" style="width:100px;height:100px"><br>
+     CNN
+    </div>
+   
+    <!--
+    <div onclick="controller('openStreamBrowser','https://www.cbs.com/all-access/')" class="grid">
+      <img src="assets/img/cbs.jpg" draggable="false" style="width:100px;height:100px"><br>
+     CBS
+    </div>
+  -->
+    
+    
+
+      <div onclick="controller('openStreamBrowser','https://www.coursera.org')" class="grid">
+      <img src="assets/img/coursera.png" draggable="false" style="width:100px;height:100px"><br>
+      Coursera
+    </div>
+
+     <div onclick="controller('openStreamBrowser','https://www.edx.org/course')" class="grid">
+      <img src="assets/img/edx9.png" draggable="false" style="width:100px;height:100px"><br>
+     EdX
+    </div>
+    <div onclick="controller('openStreamBrowser','https://www.ted.com/talks')" class="grid">
+      <img src="assets/img/TED9.png" draggable="false" style="width:100px;height:100px"><br>
+     TED Talks
+    </div>
+   
+  <div onclick="controller('openStreamBrowser','https://www.vudu.com/moviesonus')" class="grid">
+      <img src="assets/img/vudu9.png" draggable="false" style="width:100px;height:100px"><br>
+     Vudu
+    </div>
+  
+    <div onclick="controller('openStreamBrowser','http://www.adultswim.com/streams/marathons')" class="grid">
+      <img src="assets/img/adultswim.jpg" draggable="false" style="width:100px;height:100px"><br>
+     Adult Swim
+    </div>
+     <div onclick="controller('openStreamBrowser','http://www.google.com')" class="grid">
+    	<img src="assets/img/chrome9.png" draggable="false" style="width:100px;height:100px"><br>
+    	Custom
+    </div>
+</div>
+<br>
+    <hr style="width:100%">
+    <div style="float:left;width:40%;line-height:17px">
+  <img id="imag" class="ovv" src="assets/img/mac.jpg" draggable="false" style="width:200px;opacity:.8">
+  <br>
+  <span style="font-size:13px;line-height:8px">
+Chameleon is a tray application, control by clicking on the icon in the menubar or using keyboard shorcuts.
+</span>
+</div>
+<div style="width:100vw">
+     <button style="margin-top:20px;margin-right:50px" class="button blue" onclick="controller('manual')"><b>Online Manual</b></button>
+    <button style="margin-top:20px" class="button red" onclick="controller('quitprompt')"><b>Quit Chameleon</b></button>
+<br><br><div style="float:right;padding-right:40px;font-size:12px">version 2.0.1</style>
+</div>
+    </div>
+</body>
+</html>
