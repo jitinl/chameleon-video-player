@@ -139,6 +139,10 @@ Chameleon is a tray application, control by clicking on the icon in the menubar 
       <img src="assets/img/twitch8.png" draggable="false" style="width:100px;height:100px"><br>
       Twitch TV
     </div>
+     <div onclick="controller('openStreamBrowser','http://go.cnn.com/')" class="grid">
+      <img src="assets/img/mixer1.png" draggable="false" style="width:100px;height:100px"><br>
+     Mixer
+    </div>
     <div onclick="controller('openStreamBrowser','https://www.youtube.com')" class="grid">
       <img src="assets/img/youtube2.png" draggable="false" style="width:100px;height:100px"><br>
       YouTube
@@ -164,11 +168,13 @@ Chameleon is a tray application, control by clicking on the icon in the menubar 
      Crackle
     </div>
   -->
+  <!--
     <div onclick="controller('openStreamBrowser','http://go.cnn.com/')" class="grid">
       <img src="assets/img/cnn9.png" draggable="false" style="width:100px;height:100px"><br>
      CNN
     </div>
-   
+   -->
+
     <!--
     <div onclick="controller('openStreamBrowser','https://www.cbs.com/all-access/')" class="grid">
       <img src="assets/img/cbs.jpg" draggable="false" style="width:100px;height:100px"><br>
@@ -214,11 +220,14 @@ Chameleon is a tray application, control by clicking on the icon in the menubar 
   <span style="font-size:13px;line-height:8px">
 Chameleon is a tray application, control by clicking on the icon in the menubar or using keyboard shorcuts.
 </span>
+
 </div>
 <div style="width:100vw">
-     <button style="margin-top:20px;margin-right:50px" class="button blue" onclick="controller('manual')"><b>Online Manual</b></button>
-    <button style="margin-top:20px" class="button red" onclick="controller('quitprompt')"><b>Quit Chameleon</b></button>
-<br><br><div style="float:right;padding-right:40px;font-size:12px">version 2.0.1</style>
+  <input id="url" placeholder="http://localhost:8080/" style="position:absolute;width:32%;height:28px;font-size:20px"><button style="position:absolute;right:5%" class="button purple" onclick="controller('openURL')"><b>GoTo URL</b></button>
+
+     <button style="margin-top:60px;margin-right:50px" class="button blue" onclick="controller('manual')"><b>Online Manual</b></button>
+    <button style="margin-top:60px;margin-right:0px" class="button red" onclick="controller('quitprompt')"><b>Quit Chameleon</b></button>
+<div style="float:right;padding-right:40px;font-size:12px;margin-top:80px">version 2.1.0</style>
 </div>
     </div>
 </body>

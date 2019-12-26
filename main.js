@@ -1,5 +1,6 @@
 const electron = require('electron')
 //console.log("ELECTRON VERSION = ", process.version);
+//const { inAppPurchase } = require('electron').remote
 
 var shell = electron.shell
 var robot = require("robotjs");
@@ -22,7 +23,7 @@ const path = require('path')
 var dia = false;
 
 //-------------------
-var DRM = false;
+var DRM = true;
 var steam = true;
 //-------------------
 
@@ -80,6 +81,8 @@ const url = require('url');
 ipcMain.on("quitprompt", function (event, arg) {
   app.quit()
 });
+
+
 
 
 ipcMain.on("manual", function (event, arg) {
@@ -192,7 +195,21 @@ function start() {
 
   })
 
+   ipcMain.on("openURL", function (app) {
 
+modeWin.webContents.executeJavaScript(`document.getElementById("url").value`, function (result) {
+ 
+if (result==''){result="http://localhost:8080/"}
+
+   global.playlist = result
+    getdimensions()
+
+   modeWin.close()
+
+})
+ 
+
+  })
 
   ipcMain.on("startwfile", function (event, arg) {
 
