@@ -23,7 +23,7 @@ const path = require('path')
 var dia = false;
 
 //-------------------
-var DRM = true;
+var DRM = false;
 var steam = true;
 //-------------------
 
