@@ -1,0 +1,6 @@
+Step 0 : nvm use 10
+Step 1 : npm ci
+Step 2 : npm start
+test if it works fine.
+Step 3: rm -rf dist
+Step 4: npm run-script build

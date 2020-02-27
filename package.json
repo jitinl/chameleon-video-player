@@ -8,7 +8,8 @@
     "start": "electron . --enable-logging --remote-debugging-port='8315'",
     "pack": "build --dir",
     "dist": "build",
-    "postinstall": "electron-builder install-app-deps"
+    "postinstall": "electron-builder install-app-deps",
+    "build": "electron-builder ."
   },
   "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
