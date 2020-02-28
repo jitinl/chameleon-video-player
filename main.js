@@ -200,9 +200,9 @@ function start() {
 
   })
 
-  ipcMain.on("openURL", function (app) {
+  ipcMain.on("openURL", function (event, arg) {
 
-    modeWin.webContents.executeJavaScript(`document.getElementById("url").value`, function (result) {
+    let result = arg;
 
       if (result == '') { result = "http://localhost:8080/" }
 
@@ -211,10 +211,7 @@ function start() {
 
       modeWin.close()
 
-    })
-
-
-  })
+    });
 
   ipcMain.on("startwfile", function (event, arg) {
 

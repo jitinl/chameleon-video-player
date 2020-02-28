@@ -223,7 +223,7 @@ Chameleon is a tray application, control by clicking on the icon in the menubar 
 
 </div>
 <div style="width:100vw">
-  <input id="url" placeholder="http://localhost:8080/" style="position:absolute;width:32%;height:28px;font-size:20px"><button style="position:absolute;right:5%" class="button purple" onclick="controller('openURL')"><b>GoTo URL</b></button>
+  <input id="url" placeholder="http://localhost:8080/" style="position:absolute;width:32%;height:28px;font-size:20px"><button style="position:absolute;right:5%" class="button purple" onclick="controller('openURL', document.getElementById('url').value)"><b>GoTo URL</b></button>
 
      <button style="margin-top:60px;margin-right:50px" class="button blue" onclick="controller('manual')"><b>Online Manual</b></button>
     <button style="margin-top:60px;margin-right:0px" class="button red" onclick="controller('quitprompt')"><b>Quit Chameleon</b></button>
