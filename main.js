@@ -38,6 +38,7 @@ app.commandLine.appendSwitch('widevine-cdm-path', path.join(__dirname, 'widevine
 // The version of plugin can be got from `chrome://plugins` page in Chrome.
 app.commandLine.appendSwitch('widevine-cdm-version', '1.4.8.866')
 
+
 let pluginName
 switch (process.platform) {
   case 'win32':
@@ -103,9 +104,9 @@ const addClickableRegion = options => {
   const parentBounds = parent.getBounds();
   const {
     width = parentBounds.width,
-      height = parentBounds.height,
-      x = 0,
-      y = 0
+    height = parentBounds.height,
+    x = 0,
+    y = 0
   } = options;
 
   // create a child window, setting the position based on the parent's bounds
@@ -126,7 +127,8 @@ const addClickableRegion = options => {
     fullscreen: false,
     webPreferences: {
       // The `plugins` have to be enabled.
-      plugins: true
+      plugins: true,
+      nodeIntegration: true
     },
     icon: path.join(__dirname, 'assets/icons/png/icon_32x32@2x.png')
   });
@@ -174,7 +176,10 @@ const addClickableRegion = options => {
       //showDockIcon: isDebug,
       //vibrancy: systemPreferences.isDarkMode() ? 'dark' : 'light',
       width: 256,
-      parent
+      parent,
+      webPreferences: {
+        nodeIntegration: true
+    }
     });
     global.menubar = menubar;
   }
@@ -191,23 +196,23 @@ function start() {
     global.playlist = url
     getdimensions()
 
-   modeWin.close()
+    modeWin.close()
 
   })
 
-   ipcMain.on("openURL", function (app) {
+  ipcMain.on("openURL", function (app) {
 
-modeWin.webContents.executeJavaScript(`document.getElementById("url").value`, function (result) {
- 
-if (result==''){result="http://localhost:8080/"}
+    modeWin.webContents.executeJavaScript(`document.getElementById("url").value`, function (result) {
 
-   global.playlist = result
-    getdimensions()
+      if (result == '') { result = "http://localhost:8080/" }
 
-   modeWin.close()
+      global.playlist = result
+      getdimensions()
 
-})
- 
+      modeWin.close()
+
+    })
+
 
   })
 
@@ -257,7 +262,8 @@ if (result==''){result="http://localhost:8080/"}
     minimizable: false,
     webPreferences: {
       // The `plugins` have to be enabled.
-      plugins: true
+      plugins: true,
+      nodeIntegration: true
     },
   });
   modeWin.loadURL(MODE_HTML);
@@ -332,7 +338,7 @@ function checkSN(email, sn) {
 let promptWin;
 
 function prompt(trials) {
-  global.trials=trials;
+  global.trials = trials;
   ipcMain.on("enterlicense", function (event, arg) {
     //console.log(checkSN(arg[0], arg[1]))
     if (checkSN(arg[0], arg[1])) {
@@ -342,8 +348,8 @@ function prompt(trials) {
           var decrypt = CryptoJS.AES.decrypt(data.data, 'ENCRYPTION_KEY');
           data = decrypt.toString(CryptoJS.enc.Utf8);
           data = JSON.parse(data);
-        }else{
-          data=defaults;
+        } else {
+          data = defaults;
         }
 
         data.email = arg[0]
@@ -378,9 +384,9 @@ function prompt(trials) {
         data = decrypt.toString(CryptoJS.enc.Utf8);
         //console.log(JSON.stringify(data)+'f');
         data = JSON.parse(data);
-      }else{
-           promptWin.webContents.send("triallimit")
-           return;
+      } else {
+        promptWin.webContents.send("triallimit")
+        return;
       }
 
 
@@ -417,7 +423,8 @@ function prompt(trials) {
     minimizable: false,
     webPreferences: {
       // The `plugins` have to be enabled.
-      plugins: true
+      plugins: true,
+      nodeIntegration: true
     },
   });
   promptWin.loadURL(PROMPT_HTML);
@@ -435,60 +442,60 @@ function ready() {
         })
   */
 
-  if (DRM){
-  storage.get('data')
-    .then(data => {
-      if (data.data) {
-        var decrypt = CryptoJS.AES.decrypt(data.data, 'ENCRYPTION_KEY');
-        data = decrypt.toString(CryptoJS.enc.Utf8);
-        data = JSON.parse(data);
-      }
-
-      if (!DRM || checkSN(data.email, data.sn) || data.relaunch) { // validation function between email and sn
-        global.opac = data.opacity
-        if (data.relaunch) {
-          data.relaunch = false;
-          encrypt = CryptoJS.AES.encrypt(JSON.stringify(data), 'ENCRYPTION_KEY')
-          var temp = {
-            data: String(encrypt)
-          };
-          storage.set('data', temp);
+  if (DRM) {
+    storage.get('data')
+      .then(data => {
+        if (data.data) {
+          var decrypt = CryptoJS.AES.decrypt(data.data, 'ENCRYPTION_KEY');
+          data = decrypt.toString(CryptoJS.enc.Utf8);
+          data = JSON.parse(data);
         }
-        start();
-      } else {
-        if ((data.trials && data.opacity) || data.trials==0) {
-          prompt(data.trials)
+
+        if (!DRM || checkSN(data.email, data.sn) || data.relaunch) { // validation function between email and sn
+          global.opac = data.opacity
+          if (data.relaunch) {
+            data.relaunch = false;
+            encrypt = CryptoJS.AES.encrypt(JSON.stringify(data), 'ENCRYPTION_KEY')
+            var temp = {
+              data: String(encrypt)
+            };
+            storage.set('data', temp);
+          }
+          start();
         } else {
-          //console.log(JSON.stringify(defaults))
-          encrypt = CryptoJS.AES.encrypt(JSON.stringify(defaults), 'ENCRYPTION_KEY')
+          if ((data.trials && data.opacity) || data.trials == 0) {
+            prompt(data.trials)
+          } else {
+            //console.log(JSON.stringify(defaults))
+            encrypt = CryptoJS.AES.encrypt(JSON.stringify(defaults), 'ENCRYPTION_KEY')
+            var temp = {
+              data: String(encrypt)
+            };
+            storage.set('data', temp).then(function () {
+              prompt(defaults.trials)
+            })
+          }
+        }
+      })
+      .catch(err => {
+        console.log('err', err)
+        if (!DRM) {
+          start();
+
+        } else {
+          var encrypt = CryptoJS.AES.encrypt(JSON.stringify(defaults), 'ENCRYPTION_KEY')
           var temp = {
             data: String(encrypt)
           };
           storage.set('data', temp).then(function () {
             prompt(defaults.trials)
-          })
+          });
         }
-      }
-    })
-    .catch(err => {
-      console.log('err', err)
-      if (!DRM) {
-        start();
+      });
 
-      } else {
-        var encrypt = CryptoJS.AES.encrypt(JSON.stringify(defaults), 'ENCRYPTION_KEY')
-        var temp = {
-          data: String(encrypt)
-        };
-        storage.set('data', temp).then(function () {
-          prompt(defaults.trials)
-        });
-      }
-    });
-
-   }else{
+  } else {
     start()
-   } 
+  }
 }
 
 function postdialog(file) {
@@ -557,6 +564,8 @@ function createWindow(w, h, p) {
       plugins: true,
       //sandbox: true,
       //nodeIntegration: false,
+      nodeIntegration: true,
+      webviewTag: true
     },
     fullscreen: false,
     width: w,
@@ -602,29 +611,29 @@ function createWindow(w, h, p) {
     /**/
 
 
-    if (DRM){
-    storage.get('data')
-      .then(data => {
+    if (DRM) {
+      storage.get('data')
+        .then(data => {
 
-        if (data.data) {
-          var decrypt = CryptoJS.AES.decrypt(data.data, 'ENCRYPTION_KEY');
-          data = decrypt.toString(CryptoJS.enc.Utf8);
-          data = JSON.parse(data);
-        }
-        data.relaunch = true;
-        var encrypt = CryptoJS.AES.encrypt(JSON.stringify(data), 'ENCRYPTION_KEY')
-        var temp = {
-          data: String(encrypt)
-        };
+          if (data.data) {
+            var decrypt = CryptoJS.AES.decrypt(data.data, 'ENCRYPTION_KEY');
+            data = decrypt.toString(CryptoJS.enc.Utf8);
+            data = JSON.parse(data);
+          }
+          data.relaunch = true;
+          var encrypt = CryptoJS.AES.encrypt(JSON.stringify(data), 'ENCRYPTION_KEY')
+          var temp = {
+            data: String(encrypt)
+          };
 
-        storage.set('data', temp).then(function () {
-          parent.webContents.send("relaunch")
+          storage.set('data', temp).then(function () {
+            parent.webContents.send("relaunch")
+          })
         })
-      })
-}else{
-   parent.webContents.send("relaunch")
+    } else {
+      parent.webContents.send("relaunch")
 
-}
+    }
 
 
   });
@@ -791,6 +800,21 @@ app.on('activate', function () {
     }
   }
 })
+
+app.on('widevine-ready', (version, lastVersion) => {
+  if (null !== lastVersion) {
+    console.log('Widevine ' + version + ', upgraded from ' + lastVersion + ', is ready to be used!');
+  } else {
+    console.log('Widevine ' + version + ' is ready to be used!');
+  }
+});
+app.on('widevine-update-pending', (currentVersion, pendingVersion) => {
+  console.log('Widevine ' + currentVersion + ' is ready to be upgraded to ' + pendingVersion + '!');
+});
+app.on('widevine-error', (error) => {
+  console.log('Widevine installation encountered an error: ' + error);
+});
+
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.

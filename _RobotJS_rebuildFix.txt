@@ -1,1 +1,4 @@
 RobotJS Fix :: ./node_modules/.bin/electron-rebuild
+
+update - don't do this, instead use : npm run electron-rebuild
+The reason is that we are using widevine's custom electron build. There is a version mismatch. Check package.json scripts for more.
