@@ -226,12 +226,12 @@ function start() {
           name: 'Movies',
           extensions: ['mkv', 'avi', 'mp4']
         }]
-      }, function (filename) {
+      }).then(filename=> {
         if (typeof filename == 'undefined') {
           //app.quit()
         } else {
-
-          global.playlist = filename
+          
+          global.playlist = filename.filePaths
           /**/
           getdimensions();
 

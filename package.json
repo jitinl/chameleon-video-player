@@ -15,7 +15,7 @@
   },
   "build": {
     "electronVersion":"8.0.0",
-    "electronDist":"/Users/a/work/chris/Chameleon-Video-Player/node_modules/electron/dist/",
+    "electronDist":"./node_modules/electron/dist/",
     "appId": "yourappid",
     "dmg": {
       "contents": [
